@@ -5,7 +5,9 @@ import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CustomTextInput from '../Common/CustomTextInput';
 import CustomButton from '../Common/CustomButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+let isvalid = false;
 function Register({ route }) {
   const navigation = useNavigation();
   const [Name, setName] = React.useState('');
@@ -17,16 +19,40 @@ function Register({ route }) {
   const [badPassword, setBadPassword] = React.useState(false);
   const [badPhone, setBadPhone] = React.useState(false);
   function validate() {
-    // if (Email == '') {
-    //   setBadEmail(true);
-    // }
-    // if (Password == '') {
-    //   setBadPassword(true);
-    // }
-    Email == '' ? setBadEmail(true) : setBadEmail(false);
-    Name == '' ? setBadName(true) : setBadName(false);
-    Password == '' ? setBadPassword(true) : setBadPassword(false);
-    Phone == '' ? setBadPhone(true) : setBadPhone(false);
+    if (Name == '') {
+      setBadName(true);
+    } else {
+      setBadName(false);
+      isvalid = true;
+      if (Email == '') {
+        setBadEmail(true);
+      } else {
+        setBadEmail(false);
+        isvalid = true;
+        if (Password == '') {
+          setBadPassword(true);
+        } else {
+          setBadPassword(false);
+          isvalid = true;
+          if (Phone == '') {
+            setBadPhone(true);
+          } else {
+            setBadPhone(false);
+            isvalid = true;
+            saveData();
+          }
+        }
+      }
+    }
+  }
+  async function saveData() {
+    // nama valiabel akan digunakan pada login
+    await AsyncStorage.setItem('NAME', Name);
+    await AsyncStorage.setItem('EMAIL', Email);
+    await AsyncStorage.setItem('PASSWORD', Password);
+    await AsyncStorage.setItem('PHONE', Phone);
+    navigation.goBack();
+    console.log(Name, Email, Password, Phone);
   }
   return (
     <View style={{ flex: 1, justifyContent: 'center' }}>

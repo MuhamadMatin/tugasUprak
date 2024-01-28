@@ -28,9 +28,6 @@ function CustomTextInput({ onPress, title, bgColor, textColor }) {
         {title}
       </Text>
     </TouchableOpacity>
-    // <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center', width: '90%', paddingLeft: 15, paddingRight: 15, height: 50, borderRadius: 10, borderWidth: 0.5, marginTop: 45 }}>
-    //   <TextInput style={{ marginLeft: 10, fontSize: 18, width: '100%' }} secureTextEntry={type ? true : false} placeholder={placeholder} />
-    // </View>
   );
 }
 
