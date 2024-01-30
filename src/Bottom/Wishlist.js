@@ -46,6 +46,9 @@ function Wishlist() {
                 },
                 shadowOpacity: 0.25,
               }}>
+                <Text onPress={() => clearWishlist()}>
+                  hapus
+                </Text>
               <Image
                 style={{ width: '100%', justifyContent: 'center', aspectRatio: 1, resizeMode: 'contain' }}
                 source={{
@@ -58,29 +61,27 @@ function Wishlist() {
                 <Text style={{ marginTop: 5, fontSize: 16 }}>| {item.price} $</Text>
               </View>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <TouchableOpacity
-                    style={{ paddingTop: 5, paddingBottom: 5, paddingLeft: 10, paddingRight: 10 }}
-                    onPress={() => {
-                      deleteFromWishlist(item);
-                    }}>
-                    <Image source={require('../images/delete.png')} style={{ width: 24, height: 24, tintColor: 'red' }} />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{
-                      paddingTop: 5,
-                      paddingBottom: 5,
-                      paddingLeft: 10,
-                      paddingRight: 10,
-                      borderWidth: 1,
-                      borderRadius: 10,
-                    }}
-                    onPress={() => {
-                      addToCart(item);
-                    }}>
-                    <Text style={{ fontWeight: 500, fontSize: 16 }}>Add to Cart</Text>
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                  style={{ paddingTop: 5, paddingBottom: 5, paddingLeft: 10, paddingRight: 10 }}
+                  onPress={() => {
+                    deleteFromWishlist(item);
+                  }}>
+                  <Image source={require('../images/delete.png')} style={{ width: 24, height: 24, tintColor: 'red' }} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    paddingTop: 5,
+                    paddingBottom: 5,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                    borderWidth: 1,
+                    borderRadius: 10,
+                  }}
+                  onPress={() => {
+                    addToCart(item);
+                  }}>
+                  <Text style={{ fontWeight: 500, fontSize: 16 }}>Add to Cart</Text>
+                </TouchableOpacity>
               </View>
             </View>
           )}

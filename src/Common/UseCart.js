@@ -15,6 +15,7 @@ export function useCart() {
   async function saveCart(newCart) {
     setCart(newCart);
     await AsyncStorage.setItem('cart', JSON.stringify(newCart));
+    console.log(cart);
   }
 
   async function addToCart(item) {

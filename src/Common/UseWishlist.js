@@ -23,7 +23,6 @@ export function useWishlist() {
     if (itemInWishlist) {
       Alert.alert('sudah ada');
     } else {
-      // item.quantity = 1;
       newWishlist.push(item);
     }
     saveWishlist(newWishlist);
@@ -36,9 +35,7 @@ export function useWishlist() {
   }
 
   async function clearWishlist() {
-    // Set the wishlist state to an empty array
     setWishlist([]);
-    // Clear the wishlist from AsyncStorage
     await AsyncStorage.removeItem('wishlist');
   }
 
