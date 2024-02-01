@@ -2,14 +2,44 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, FlatList, Image, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
-import { useCart } from '../Common/UseCart';
-import Loader from '../Common/Loader';
-import CustomButton from '../Common/CustomButton';
+import { useCart } from '../Composables/UseCart';
+import Loader from '../Custom/Loader';
+import CustomButton from '../Custom/CustomButton';
+import { useFetch } from '../Composables/UseFetch';
 
 function CheckoutScreen() {
   const navigation = useNavigation();
   const [total, setTotal] = useState();
   const { cart, loadCart, addToCart, removeFromCart, deleteFromCart } = useCart();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  // const { fetchApi } = useFetch();
+
+  async function fetchApi(origin, destination, weight) {
+    try {
+      const response = await fetch('https://api.rajaongkir.com/starter/cost', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          key: '399e1db98876dab3c15258a7734c38dd',
+        },
+        body: JSON.stringify({
+          origin: '444',
+          destination: '409',
+          weight: 1,
+          courier: 'jne',
+        }),
+      });
+      const json = await response.json();
+      setData(json);
+      console.log(json);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   React.useEffect(() => {
     loadCart();
@@ -25,16 +55,17 @@ function CheckoutScreen() {
       <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10 }}>
         <FlatList
           data={cart}
+          style={{marginTop:10}}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
-                marginTop: 20,
+                marginTop: 5,
                 marginLeft: 5,
                 marginRight: 5,
-                marginBottom: 20,
+                marginBottom: 5,
                 padding: 15,
                 backgroundColor: 'white',
                 borderRadius: 10,
@@ -68,8 +99,8 @@ function CheckoutScreen() {
           <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 500 }}>{total}$</Text>
         </View>
         <Text>pengiriman</Text>
-        <View style={{ marginBottom:10 }}>
-          <CustomButton onPress={() => {}} title={'Checkout now'} bgColor={'#000'} textColor={'#fff'} />
+        <View style={{ marginBottom: 10 }}>
+          <CustomButton onPress={() => fetchApi()} title={'Checkout now'} bgColor={'#000'} textColor={'#fff'} />
         </View>
       </View>
     </View>

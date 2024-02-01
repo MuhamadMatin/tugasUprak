@@ -8,6 +8,7 @@ import RegisterScreen from './Screens/RegisterScreen';
 import IndexScreen from './Screens/IndexScreen';
 import AddressScreen from './Screens/AddressScreen';
 import CheckoutScreen from './Screens/CheckoutScreen';
+// import TesScreen from './Screens/TesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +30,7 @@ function AppNavigator() {
         {isAuthenticated ? (
           <>
             <Stack.Screen
-              name="Awikwok"
+              name="index"
               component={IndexScreen}
               options={{
                 headerShown: true,
@@ -84,6 +85,15 @@ function AppNavigator() {
           name="Checkout"
           component={CheckoutScreen}
         />
+        {/* <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: '#f4f4f4',
+            },
+          }}
+          name="Tes"
+          component={TesScreen}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

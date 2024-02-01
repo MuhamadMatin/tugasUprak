@@ -1,14 +1,7 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, Modal, ActivityIndicator } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CustomTextInput from '../Common/CustomTextInput';
-import CustomButton from '../Common/CustomButton';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, Modal, ActivityIndicator } from 'react-native';
 
 function Loader({ modalVisible, setModalVisible }) {
-  // const navigation = useNavigation();
   return (
     <Modal
       animationType="fade"

@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-function CustomTextInput({ value, onChangeText, placeholder, type, keyboardtype }) {
+function CustomTextInput({ value, onChangeText, placeholder, type, keyboardtype, icon }) {
   return (
     <GestureHandlerRootView>
-      <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center', width: '90%', paddingLeft: 15, paddingRight: 15, height: 50, borderRadius: 10, borderWidth: 0.5, marginTop: 45 }}>
+      <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center', width: '90%', paddingLeft: 15, paddingRight: 15, height: 50, borderRadius: 10, borderWidth: 0.5, marginTop: 30 }}>
+        <Image source={icon} style={{width:30, height:30}} />
         <TextInput
           value={value}
           onChangeText={(txt) => onChangeText(txt)}

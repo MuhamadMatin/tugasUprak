@@ -3,10 +3,12 @@ import { View, Text, TouchableOpacity, Image, Button, TextInput } from 'react-na
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import Address from '../Screens/AddressScreen';
-import CustomTextInput from '../Common/CustomTextInput';
-import CustomButton from '../Common/CustomButton';
+import CustomTextInput from '../Custom/CustomTextInput';
+import CustomButton from '../Custom/CustomButton';
+import CustomAlert from '../Custom/CustomAlert';
+import CustomAlertAuto from '../Custom/CustomAlertAuto';
 
-function Profile({ route }) {
+function Profile() {
   const navigation = useNavigation();
   const [data, setData] = useState({});
 
@@ -25,7 +27,7 @@ function Profile({ route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', marginTop: 20, paddingBottom: 70, paddingLeft: 10, paddingRight: 10 }}>
       <View style={{ borderWidth: 1, borderRadius: 999, justifyContent: 'center', alignItems: 'center' }}>
-        <Image source={require('../images/profile.png')} style={{ width: 56, height: 56, tintColor: '#000' }} />
+        <Image source={require('../../assets/images/profile.png')} style={{ width: 56, height: 56, tintColor: '#000' }} />
       </View>
       <View style={{ tinColor: '#000', alignItems: 'center' }}>
         <Text
@@ -37,6 +39,7 @@ function Profile({ route }) {
         <Text>{data.email}</Text>
         <Text>{data.address}</Text>
       </View>
+      <CustomAlertAuto title={'coba'} closedText={'hore'} />
       <CustomButton onPress={() => navigation.navigate('Address')} title={'Address'} bgColor={'#080202'} textColor={'#fff'} />
     </View>
   );

@@ -3,9 +3,9 @@ import { View, Text, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CustomTextInput from '../Common/CustomTextInput';
-import CustomButton from '../Common/CustomButton';
-import Loader from '../Common/Loader';
+import CustomTextInput from '../Custom/CustomTextInput';
+import CustomButton from '../Custom/CustomButton';
+import Loader from '../Custom/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login({ route }) {
@@ -58,7 +58,7 @@ function Login({ route }) {
         }}>
         login Screen
       </Text>
-      <CustomTextInput value={Email} onChangeText={(txt) => setEmail(txt)} placeholder={'Email@gmail.com'} />
+      <CustomTextInput icon={require('../../assets/images/email.png')} value={Email} onChangeText={(txt) => setEmail(txt)} placeholder={'Email@gmail.com'} />
       {badEmail === true && (
         <Text
           style={{
@@ -68,7 +68,7 @@ function Login({ route }) {
           Enter email
         </Text>
       )}
-      <CustomTextInput type={'password'} value={Password} onChangeText={(txt) => setPassword(txt)} placeholder={'•••••••••••'} />
+      <CustomTextInput icon={require('../../assets/images/password.png')} type={'password'} value={Password} onChangeText={(txt) => setPassword(txt)} placeholder={'•••••••••••'} />
       {badPassword === true && (
         <Text
           style={{

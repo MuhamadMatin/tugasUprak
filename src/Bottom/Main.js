@@ -1,13 +1,17 @@
 import { View, Text, TouchableOpacity, ActivityIndicator, FlatList, Image, StyleSheet, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // import AsyncStorage
-import Loader from '../Common/Loader';
-import { useCart } from '../Common/UseCart';
-import { useWishlist } from '../Common/UseWishlist';
+import Loader from '../Custom/Loader';
+import { useCart } from '../Composables/UseCart';
+import { useWishlist } from '../Composables/UseWishlist';
+import { useProducts } from '../Composables/UseAllProducts';
+import CustomAlertAuto from '../Custom/CustomAlertAuto';
 
-function Main({ item }) {
+function Main() {
+  const [modalVisible, setModalVisible] = useState(true);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const { products, loadProducts, addProducts, deleteProducts } = useProducts();
   const { cart, loadCart, addToCart, removeFromCart, deleteFromCart } = useCart();
   const { wishlist, loadWishlist, addToWishlist, removeFromWishlist, deleteFromWishlist } = useWishlist();
 
@@ -23,6 +27,19 @@ function Main({ item }) {
     }
   }
 
+  async function iSWishlist(item) {
+    if (wishlist.find((wishlistItem) => wishlistItem.id === item.id)) {
+      deleteFromWishlist(item);
+    } else {
+      addToWishlist(item);
+    }
+  }
+
+  function handleCart(item) {
+    addToCart(item);
+    tes();
+  }
+
   useEffect(() => {
     getProducts();
     loadCart();
@@ -35,7 +52,7 @@ function Main({ item }) {
         {isLoading ? (
           <Loader />
         ) : (
-          <View>
+          <View style>
             <FlatList
               data={data}
               numColumns={2}
@@ -60,30 +77,33 @@ function Main({ item }) {
                     },
                     shadowOpacity: 0.25,
                   }}>
+                  {/* wishlist */}
                   <View style={{ position: 'absolute', top: 10, zIndex: 1, right: 10, width: '20%' }}>
                     <TouchableOpacity
                       onPress={() => {
-                        if (wishlist.find((wishlistItem) => wishlistItem.id === item.id)) {
-                          deleteFromWishlist(item);
-                        } else {
-                          // addToWishlist(item);
-                        }
+                        iSWishlist(item);
                       }}
                       style={{ borderRadius: 999, alignItems: 'center', justifyContent: 'center' }}>
-                      <Image source={wishlist.find((wishlistItem) => wishlistItem.id === item.id) ? require('../images/heart2.png') : require('../images/hearth.png')} style={{ width: 24, height: 24, tintColor: 'red' }} />
+                      <Image
+                        source={wishlist.find((wishlistItem) => wishlistItem.id === item.id) ? require('../../assets/images/heart2.png') : require('../../assets/images/hearth.png')}
+                        style={{ width: 24, height: 24, tintColor: 'red' }}
+                      />
                     </TouchableOpacity>
                   </View>
+                  {/* image */}
                   <Image
                     style={{ width: '100%', justifyContent: 'center', height: undefined, aspectRatio: 1, resizeMode: 'contain' }}
                     source={{
                       uri: item.image,
                     }}
                   />
-                  <Text style={{ marginTop: 10, fontSize: 18 }}>{item.title}</Text>
+                  {/* title */}
+                  <Text style={{ marginTop: 10, fontSize: 16 }}>{item.title}</Text>
                   <View style={{ flexDirection: 'row' }}>
                     <Text style={{ color: 'orange', marginTop: 5, fontSize: 16, marginRight: 5 }}>⭐{item.rating.rate}</Text>
                     <Text style={{ marginTop: 5, fontSize: 16 }}>| {item.price} $</Text>
                   </View>
+                  {/* add to cart */}
                   <TouchableOpacity
                     style={{
                       marginTop: 10,
@@ -95,12 +115,13 @@ function Main({ item }) {
                       paddingTop: 5,
                       alignItems: 'center',
                     }}
-                    onPress={() => addToCart(item)}>
+                    onPress={() => handleCart(item)}>
                     <Text>Add To Cart</Text>
                   </TouchableOpacity>
                 </View>
               )}
             />
+            {/* <CustomAlertAuto title={'tes'} closedText={'hore'} modalVisible={() => setModalVisible(true)} />; */}
           </View>
         )}
       </View>

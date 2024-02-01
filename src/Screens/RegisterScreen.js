@@ -3,8 +3,8 @@ import { View, Text } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CustomTextInput from '../Common/CustomTextInput';
-import CustomButton from '../Common/CustomButton';
+import CustomTextInput from '../Custom/CustomTextInput';
+import CustomButton from '../Custom/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let isvalid = false;
@@ -64,7 +64,7 @@ function Register({ route }) {
         }}>
         Register Screen
       </Text>
-      <CustomTextInput value={Name} onChangeText={(txt) => setName(txt)} placeholder={'Your name'} />
+      <CustomTextInput icon={require('../../assets/images/profile.png')} value={Name} onChangeText={(txt) => setName(txt)} placeholder={'Your name'} />
       {badName === true && (
         <Text
           style={{
@@ -74,7 +74,7 @@ function Register({ route }) {
           Enter name
         </Text>
       )}
-      <CustomTextInput value={Email} onChangeText={(txt) => setEmail(txt)} placeholder={'Email@gmail.com'} />
+      <CustomTextInput icon={require('../../assets/images/email.png')} value={Email} onChangeText={(txt) => setEmail(txt)} placeholder={'Email@gmail.com'} />
       {badEmail === true && (
         <Text
           style={{
@@ -84,7 +84,7 @@ function Register({ route }) {
           Enter email
         </Text>
       )}
-      <CustomTextInput value={Password} type={'password'} onChangeText={(txt) => setPassword(txt)} placeholder={'•••••••••••'} />
+      <CustomTextInput icon={require('../../assets/images/password.png')} value={Password} type={'password'} onChangeText={(txt) => setPassword(txt)} placeholder={'•••••••••••'} />
       {badPassword === true && (
         <Text
           style={{
@@ -94,7 +94,7 @@ function Register({ route }) {
           Enter Password
         </Text>
       )}
-      <CustomTextInput value={Phone} onChangeText={(txt) => setPhone(txt)} keyboardtype={'phone-pad'} placeholder={'12345678'} />
+      <CustomTextInput icon={require('../../assets/images/phone.png')} value={Phone} onChangeText={(txt) => setPhone(txt)} keyboardtype={'phone-pad'} placeholder={'12345678'} />
       {badPhone === true && (
         <Text
           style={{

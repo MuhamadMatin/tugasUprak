@@ -22,7 +22,7 @@ function Index() {
             setSelectedTab(0);
           }}
           style={{ width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={require('../images/home.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 0 ? '#000' : '#bebebe' }} />
+          <Image source={require('../../assets/images/home.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 0 ? '#000' : '#bebebe' }} />
         </TouchableOpacity>
         {/* search */}
         <TouchableOpacity
@@ -30,7 +30,7 @@ function Index() {
             setSelectedTab(1);
           }}
           style={{ width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={require('../images/search.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 1 ? '#000' : '#bebebe' }} />
+          <Image source={require('../../assets/images/search.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 1 ? '#000' : '#bebebe' }} />
         </TouchableOpacity>
         {/* cart */}
         <View style={{ width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
@@ -39,7 +39,7 @@ function Index() {
               setSelectedTab(2);
             }}
             style={{ width: '60%', height: '60%', backgroundColor: '#000', borderRadius: 999, justifyContent: 'center', alignItems: 'center' }}>
-            <Image source={require('../images/shop.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 2 ? 'yellow' : '#bebebe' }} />
+            <Image source={require('../../assets/images/shop.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 2 ? 'yellow' : '#bebebe' }} />
           </TouchableOpacity>
         </View>
         {/* wishlist */}
@@ -48,7 +48,7 @@ function Index() {
             setSelectedTab(3);
           }}
           style={{ width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={require('../images/hearth.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 3 ? '#000' : '#bebebe' }} />
+          <Image source={require('../../assets/images/hearth.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 3 ? '#000' : '#bebebe' }} />
         </TouchableOpacity>
         {/* profile */}
         <TouchableOpacity
@@ -56,7 +56,7 @@ function Index() {
             setSelectedTab(4);
           }}
           style={{ width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={require('../images/profile.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 4 ? '#000' : '#bebebe' }} />
+          <Image source={require('../../assets/images/profile.png')} style={{ width: 24, height: 24, tintColor: selectedTab == 4 ? '#000' : '#bebebe' }} />
         </TouchableOpacity>
       </View>
     </View>

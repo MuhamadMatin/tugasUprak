@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, FlatList, Image, StyleSheet, Alert } from 'react-native';
-import { useWishlist } from '../Common/UseWishlist';
-import { useCart } from '../Common/UseCart';
+import { useWishlist } from '../Composables/UseWishlist';
+import { useCart } from '../Composables/UseCart';
 
 function Wishlist() {
   const { wishlist, loadWishlist, addToWishlist, deleteFromWishlist, clearWishlist } = useWishlist();
@@ -26,10 +26,11 @@ function Wishlist() {
       ) : (
         <FlatList
           data={wishlist}
+          numColumns={2}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <View
-              // key={index}
+              key={index}
               style={{
                 flex: 1,
                 marginTop: 20,
@@ -46,27 +47,24 @@ function Wishlist() {
                 },
                 shadowOpacity: 0.25,
               }}>
-                <Text onPress={() => clearWishlist()}>
-                  hapus
-                </Text>
               <Image
                 style={{ width: '100%', justifyContent: 'center', aspectRatio: 1, resizeMode: 'contain' }}
                 source={{
                   uri: item.image,
                 }}
               />
-              <Text style={{ marginTop: 10, fontSize: 18 }}>{item.title}</Text>
+              <Text style={{ marginTop: 10, fontSize: 16 }}>{item.title}</Text>
               <View style={{ flexDirection: 'row' }}>
                 <Text style={{ color: 'orange', marginTop: 5, fontSize: 16, marginRight: 5 }}>⭐{item.rating.rate}</Text>
                 <Text style={{ marginTop: 5, fontSize: 16 }}>| {item.price} $</Text>
               </View>
-              <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                 <TouchableOpacity
-                  style={{ paddingTop: 5, paddingBottom: 5, paddingLeft: 10, paddingRight: 10 }}
+                  style={{ paddingTop: 5, paddingBottom: 5, paddingRight: 10 }}
                   onPress={() => {
                     deleteFromWishlist(item);
                   }}>
-                  <Image source={require('../images/delete.png')} style={{ width: 24, height: 24, tintColor: 'red' }} />
+                  <Image source={require('../../assets/images/delete.png')} style={{ width: 22, height: 22, tintColor: 'red' }} />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{
@@ -80,7 +78,7 @@ function Wishlist() {
                   onPress={() => {
                     addToCart(item);
                   }}>
-                  <Text style={{ fontWeight: 500, fontSize: 16 }}>Add to Cart</Text>
+                  <Text style={{ fontWeight: 500, fontSize: 14 }}>Add to Cart</Text>
                 </TouchableOpacity>
               </View>
             </View>
