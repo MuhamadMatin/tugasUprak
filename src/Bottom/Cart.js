@@ -4,15 +4,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { useCart } from '../Composables/UseCart';
 import CustomButton from '../Custom/CustomButton';
+import { useConvert } from '../Composables/UseConvert';
 
 function Cart() {
   const navigation = useNavigation();
+  const { rupiah } = useConvert();
   const [total, setTotal] = useState();
-  const { cart, loadCart, addToCart, removeFromCart, deleteFromCart } = useCart();
+  const { cart, loadCart, addToCart, removeFromCart, deleteFromCart, clearCart } = useCart();
 
   React.useEffect(() => {
     loadCart();
-  }, []);
+  }, [cart]);
 
   React.useEffect(() => {
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -34,7 +36,7 @@ function Cart() {
         </View>
       ) : (
         <View style={{ flex: 1 }}>
-          <View style={{ flex: 1, paddingBottom: 100, paddingLeft: 10, paddingRight: 10 }}>
+          <View style={{ flex: 1, marginTop: 10, paddingBottom: 110, paddingLeft: 10, paddingRight: 10 }}>
             <FlatList
               data={cart}
               keyExtractor={(item) => item.id.toString()}
@@ -43,10 +45,10 @@ function Cart() {
                   style={{
                     flex: 1,
                     flexDirection: 'row',
-                    marginTop: 20,
+                    marginTop: 5,
                     marginLeft: 5,
                     marginRight: 5,
-                    marginBottom: 20,
+                    marginBottom: 5,
                     padding: 15,
                     backgroundColor: 'white',
                     borderRadius: 10,
@@ -65,7 +67,7 @@ function Cart() {
                   />
                   <View style={{ flex: 1, marginLeft: 8 }}>
                     <Text style={{ fontWeight: 500 }}>{item.title}</Text>
-                    <Text style={{ marginTop: 5 }}>{item.price}$</Text>
+                    <Text style={{ marginTop: 5 }}>{Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(item.price * rupiah)}</Text>
                     {/* <Text>Total: {item.quantity * item.price}$</Text> */}
                     <View style={{ position: 'relative', bottom: 0, right: -75, flexDirection: 'row' }}>
                       {/* delete */}

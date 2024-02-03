@@ -8,12 +8,15 @@ import RegisterScreen from './Screens/RegisterScreen';
 import IndexScreen from './Screens/IndexScreen';
 import AddressScreen from './Screens/AddressScreen';
 import CheckoutScreen from './Screens/CheckoutScreen';
-// import TesScreen from './Screens/TesScreen';
+import DetailScreen from './Screens/DetailScreen';
+import HistoryScreen from './Screens/HistoryScreen';
+import Cart from './Bottom/Cart';
+import Main from './Bottom/Main';
 
 const Stack = createNativeStackNavigator();
 
 function AppNavigator() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const checkEmail = async () => {
@@ -27,46 +30,20 @@ function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isAuthenticated ? (
-          <>
-            <Stack.Screen
-              name="index"
-              component={IndexScreen}
-              options={{
-                headerShown: true,
-                headerStyle: {
-                  height: 70,
-                  backgroundColor: '#f4f4f4',
-                },
-                // headerRight: () => <Text>Menu</Text>,
-              }}
-            />
-          </>
-        ) : (
-          <>
-            <Stack.Screen
-              options={{
-                headerShown: false,
-                headerStyle: {
-                  backgroundColor: '#080202',
-                },
-                headerTintColor: '#fff',
-              }}
-              name="Login"
-              component={LoginScreen}
-            />
-            <Stack.Screen
-              options={{
-                headerShown: false,
-                headerStyle: {
-                  backgroundColor: '#f4f4f4',
-                },
-              }}
-              name="Register"
-              component={RegisterScreen}
-            />
-          </>
-        )}
+        <Stack.Screen
+          name="Index"
+          component={IndexScreen}
+          options={({ route }) => ({ title: route.name }, console.log(route.name))}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+        />
+        {isAuthenticated ? <></> : <></>}
         <Stack.Screen
           options={{
             headerStyle: {
@@ -85,15 +62,27 @@ function AppNavigator() {
           name="Checkout"
           component={CheckoutScreen}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           options={{
             headerStyle: {
               backgroundColor: '#f4f4f4',
             },
           }}
-          name="Tes"
-          component={TesScreen}
-        /> */}
+          name="Detail"
+          component={DetailScreen}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+        />
+        <Stack.Screen
+          name="Main"
+          component={Main}
+        />
+        <Stack.Screen
+          name="History"
+          component={HistoryScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

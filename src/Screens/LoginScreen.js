@@ -8,8 +8,9 @@ import CustomButton from '../Custom/CustomButton';
 import Loader from '../Custom/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function Login({ route }) {
-  const navigation = useNavigation();
+function Login({ navigation }) {
+  // const navigation = useNavigation();
+  const [wrong, setWrong] = React.useState(false);
   const [Email, setEmail] = React.useState('');
   const [Password, setPassword] = React.useState('');
   const [badEmail, setBadEmail] = React.useState(false);
@@ -33,7 +34,7 @@ function Login({ route }) {
       }
     }
   }
-  
+
   async function getData() {
     // nama valiabel diambil dari register dan harus sama
     const mEmail = await AsyncStorage.getItem('EMAIL');
@@ -43,6 +44,10 @@ function Login({ route }) {
       navigation.navigate('Index');
       console.log(mEmail, mPass);
       setBadPassword(false);
+    } else if (mEmail == null && Password == null) {
+      console.log(mEmail, mPass);
+      // setIsAuthenticated(true);
+      setWrong(true);
     } else {
       console.log(mEmail, mPass);
       setBadPassword(false);
@@ -58,6 +63,15 @@ function Login({ route }) {
         }}>
         login Screen
       </Text>
+      {wrong === true && (
+        <Text
+          style={{
+            alignSelf: 'center',
+            color: 'red',
+          }}>
+          Wrong Email or Password
+        </Text>
+      )}
       <CustomTextInput icon={require('../../assets/images/email.png')} value={Email} onChangeText={(txt) => setEmail(txt)} placeholder={'Email@gmail.com'} />
       {badEmail === true && (
         <Text

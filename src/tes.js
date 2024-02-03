@@ -28,7 +28,9 @@ function Index({ route }) {
         onPress={() => navigation.navigate('Login', {})}>
         <Text>kirim</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Splash', {})}>
+      <TouchableOpacity onPress={() => navigation.navigate('Splash', {
+        
+      })}>
         <Text>Splash</Text>
       </TouchableOpacity>
     </View>

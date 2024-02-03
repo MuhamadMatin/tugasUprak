@@ -1,15 +1,20 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, FlatList, Image, StyleSheet, Alert } from 'react-native';
 import { useWishlist } from '../Composables/UseWishlist';
 import { useCart } from '../Composables/UseCart';
+import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
+import { useConvert } from '../Composables/UseConvert';
 
 function Wishlist() {
+  const navigation = useNavigation();
   const { wishlist, loadWishlist, addToWishlist, deleteFromWishlist, clearWishlist } = useWishlist();
   const { addToCart } = useCart();
+  const { rupiah } = useConvert();
 
-  React.useEffect(() => {
+  useEffect(() => {
     loadWishlist();
   }, []);
+
   return (
     <View style={{ flex: 1, paddingBottom: 70, paddingLeft: 10, paddingRight: 10 }}>
       {wishlist.length === 0 ? (
@@ -53,12 +58,21 @@ function Wishlist() {
                   uri: item.image,
                 }}
               />
-              <Text style={{ marginTop: 10, fontSize: 16 }}>{item.title}</Text>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={{ color: 'orange', marginTop: 5, fontSize: 16, marginRight: 5 }}>⭐{item.rating.rate}</Text>
-                <Text style={{ marginTop: 5, fontSize: 16 }}>| {item.price} $</Text>
+              <Text
+                numberOfLines={3}
+                onPress={() =>
+                  navigation.navigate('Detail', {
+                    detail: item,
+                  })
+                }
+                style={{ marginTop: 10, fontSize: 16 }}>
+                {item.title}
+              </Text>
+              <View style={{}}>
+                <Text style={{ color: 'orange', marginTop: 5, fontSize: 16 }}>⭐{item.rating.rate}</Text>
+                <Text style={{ marginTop: 5, fontSize: 16 }}>{Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(item.price * rupiah)}</Text>
               </View>
-              <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+              <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                 <TouchableOpacity
                   style={{ paddingTop: 5, paddingBottom: 5, paddingRight: 10 }}
                   onPress={() => {

@@ -15,12 +15,18 @@ export function useAddress() {
   async function saveAddress(newAddress) {
     setAddress(newAddress);
     await AsyncStorage.setItem('address', JSON.stringify(newAddress));
-    console.log(address);
+    // console.log(address);
   }
 
   async function addAddress(item) {
     let newAddress = [...address];
     newAddress.push({ city: item.city, street: item.street, zipCode: item.zipCode });
+    saveAddress(newAddress);
+  }
+
+  async function editAddress(index, item) {
+    let newAddress = [...address];
+    newAddress[index] = { city: item.city, street: item.street, zipCode: item.zipCode };
     saveAddress(newAddress);
   }
 
@@ -31,8 +37,13 @@ export function useAddress() {
     await AsyncStorage.setItem('address', JSON.stringify(newAddress));
   }
 
+  async function clearAddress() {
+    setAddress([]);
+    await AsyncStorage.removeItem('address');
+  }
+
   useEffect(() => {
     loadAddress();
   }, []);
-  return { address, loadAddress, addAddress, removeAddress };
+  return { address, loadAddress, addAddress, removeAddress, editAddress, clearAddress };
 }

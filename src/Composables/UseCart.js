@@ -15,7 +15,6 @@ export function useCart() {
   async function saveCart(newCart) {
     setCart(newCart);
     await AsyncStorage.setItem('cart', JSON.stringify(newCart));
-    console.log(cart);
   }
 
   async function addToCart(item) {
@@ -37,7 +36,7 @@ export function useCart() {
       if (itemInCart.quantity > 1) {
         itemInCart.quantity -= 1;
       } else if ((itemInCart.quantity = 1)) {
-        Alert.alert('minimal 1 bang');
+        Alert.alert('more than 1');
       } else {
         newCart = newCart.filter((cartItem) => cartItem.id !== item.id);
       }
@@ -51,8 +50,14 @@ export function useCart() {
     await AsyncStorage.setItem('cart', JSON.stringify(newCart));
   }
 
+  async function clearCart() {
+    setCart([]);
+    await AsyncStorage.removeItem('cart');
+    console.log('clear', cart);
+  }
+
   useEffect(() => {
     loadCart();
   }, []);
-  return { cart, loadCart, addToCart, removeFromCart, deleteFromCart };
+  return { cart, loadCart, addToCart, removeFromCart, deleteFromCart, clearCart };
 }

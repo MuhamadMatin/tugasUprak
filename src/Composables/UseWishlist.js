@@ -39,8 +39,16 @@ export function useWishlist() {
     await AsyncStorage.removeItem('wishlist');
   }
 
+  async function iSWishlist(item) {
+    if (wishlist.find((wishlistItem) => wishlistItem.id === item.id)) {
+      deleteFromWishlist(item);
+    } else {
+      addToWishlist(item);
+    }
+  }
+
   useEffect(() => {
     loadWishlist();
   }, []);
-  return { wishlist, loadWishlist, addToWishlist, deleteFromWishlist, clearWishlist};
+  return { wishlist, loadWishlist, addToWishlist, deleteFromWishlist, clearWishlist, iSWishlist};
 }

@@ -5304,6 +5304,11 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-format-currency@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-format-currency/-/react-native-format-currency-0.0.5.tgz#68ca1857d1cc5bd2d918b631c9c29755b602c191"
+  integrity sha512-iarFkCig987Zw8GFPv0+ltEdAsksf0gfZGWL3+tC+60VHtnfbtFBFWP4523ltuXwplDxKu4Veem1ThEr+pZlvQ==
+
 react-native-gesture-handler@^2.14.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.14.1.tgz#930640231024b7921435ab476aa501dd4a6b2e01"
